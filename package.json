@@ -1,0 +1,14 @@
+{
+  "name": "SM-Scaffold",
+  "version": "1.0.0",
+  "description": "A simple file structure for new projects. ",
+  "main": "code.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.19.3"
+  }
+}
