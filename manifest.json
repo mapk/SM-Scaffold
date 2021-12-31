@@ -2,5 +2,8 @@
   "name": "SM Scaffold",
   "id": "961268319224363191",
   "api": "1.0.0",
-  "main": "code.js"
+  "main": "code.js",
+  "editorType": [
+    "figma"
+  ]
 }
