@@ -24,7 +24,9 @@ let run = async () => {
   // Add library cover to cover page
   let libraryCover = await figma.importComponentByKeyAsync(coverKey)
 
+  // Create cover frame
   let coverFrame = figma.createFrame()
+  // Name cover frame
   coverFrame.name = "Cover";
   // Add cover frame to cover page
   coverPage.appendChild(coverFrame);
@@ -32,6 +34,8 @@ let run = async () => {
   coverFrame.appendChild(libraryCover.createInstance());
   // Resize cover frame to match library cover
   coverFrame.resize(libraryCover.width, libraryCover.height);
+  // Set cover frame as file thumbnail
+  figma.setFileThumbnailNodeAsync(coverFrame);
 
   // Create other pager
   for (let page of pages) {
