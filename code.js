@@ -13,20 +13,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 const coverKey = "e6ed16c8b2cb018cae4e611ce5ed4becf7e28eb3";
 // Page names
 let pages = [
-    "📦 Ready for Dev + 🕹️ Prototype",
-    "🔍 Ready to Review + 🕹️ Prototype",
-    "--------------------",
-    "🐛 User Validation",
-    "🚧 In Progress",
-    "🖍 Fat Marker",
-    "🕵️‍♂️ Exploration",
-    "🦄 Future",
-    "🗑 Archive"
+    "📦   Ready for Dev",
+    "🕹️   User Validation",
+    "🚧   In Progress",
+    "🖍️   Fat Marker",
+    "🕵️   Exploration        👈"
 ];
 let run = () => __awaiter(this, void 0, void 0, function* () {
     // Create cover page
     let coverPage = figma.currentPage;
-    coverPage.name = "- Cover -";
+    coverPage.name = "        Cover";
     // Add library cover to cover page
     let libraryCover = yield figma.importComponentByKeyAsync(coverKey);
     // Create cover frame
