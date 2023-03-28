@@ -19,10 +19,15 @@ let pages = [
     "🖍️   Fat Marker",
     "🕵️   Exploration        👈"
 ];
+
 let run = () => __awaiter(this, void 0, void 0, function* () {
-    // Create cover page
+    let bg = Object.assign({}, figma.currentPage.backgrounds[0]);
+    bg.color = {r:0.90, g:0.90, b:0.936}; //#E5E5EF
+    
+    // Create cover page & set background color
     let coverPage = figma.currentPage;
     coverPage.name = "        Cover";
+    coverPage.backgrounds = [bg];
     // Add library cover to cover page
     let libraryCover = yield figma.importComponentByKeyAsync(coverKey);
     // Create cover frame
@@ -37,10 +42,11 @@ let run = () => __awaiter(this, void 0, void 0, function* () {
     coverFrame.resize(libraryCover.width, libraryCover.height);
     // Set cover frame as file thumbnail
     figma.setFileThumbnailNodeAsync(coverFrame);
-    // Create other pager
+    // Create other pages
     for (let page of pages) {
         let newPage = figma.createPage();
         newPage.name = page;
+        newPage.backgrounds = figma.currentPage.backgrounds;
     }
     // Done!
     figma.closePlugin("Project scaffolding done. 👍");
