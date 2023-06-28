@@ -12,43 +12,50 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 // Cover component key
 const coverKey = "e6ed16c8b2cb018cae4e611ce5ed4becf7e28eb3";
 // Page names
-let pages = [
+const pages = [
     "📦   Ready for Dev",
     "🕹️   User Validation",
     "🚧   In Progress",
     "🖍️   Fat Marker",
-    "🕵️   Exploration        👈"
+    "🕵️   Exploration        👈",
 ];
-
 let run = () => __awaiter(this, void 0, void 0, function* () {
-    let bg = Object.assign({}, figma.currentPage.backgrounds[0]);
-    bg.color = {r:0.90, g:0.90, b:0.936}; //#E5E5EF
-    
-    // Create cover page & set background color
+    // Create cover page & set background color (#E5E5EF)
     let coverPage = figma.currentPage;
     coverPage.name = "        Cover";
-    coverPage.backgrounds = [bg];
-    // Add library cover to cover page
-    let libraryCover = yield figma.importComponentByKeyAsync(coverKey);
+    coverPage.backgrounds = [
+        { type: "SOLID", color: { r: 0.9, g: 0.9, b: 0.936 } },
+    ];
     // Create cover frame
     let coverFrame = figma.createFrame();
     // Name cover frame
     coverFrame.name = "Cover";
     // Add cover frame to cover page
     coverPage.appendChild(coverFrame);
-    // Add library cover to cover frame
-    coverFrame.appendChild(libraryCover.createInstance());
-    // Resize cover frame to match library cover
-    coverFrame.resize(libraryCover.width, libraryCover.height);
+    // Add cover component to cover frame
+    try {
+        let coverComponent = yield figma.importComponentByKeyAsync(coverKey);
+        coverFrame.appendChild(coverComponent.createInstance());
+        // Resize cover frame to match cover component
+        coverFrame.resize(coverComponent.width, coverComponent.height);
+    }
+    catch (error) {
+        console.log("No library cover component available");
+        coverFrame.resize(960, 480);
+    }
     // Set cover frame as file thumbnail
     figma.setFileThumbnailNodeAsync(coverFrame);
-    // Create other pages
+    // Zoom to selection
+    coverPage.selection = [coverPage.children[0]];
+    figma.viewport.scrollAndZoomIntoView([coverPage.children[0]]);
+    figma.viewport.zoom = 1.0;
+    // Create other pager and set the background
     for (let page of pages) {
         let newPage = figma.createPage();
         newPage.name = page;
-        newPage.backgrounds = figma.currentPage.backgrounds;
+        newPage.backgrounds = coverPage.backgrounds;
     }
     // Done!
-    figma.closePlugin("Project scaffolding done. 👍");
+    figma.closePlugin("Scaffolding added ✨");
 });
 run();
